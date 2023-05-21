@@ -1,0 +1,75 @@
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(245.21deg, #8800f3 9.66%, #f1a259 103.19%);
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper {
+  width: 60%;
+  height: 30%;
+  color: #ffffff;
+  text-align: center;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 400;
+  font-size: calc(12px + 8 * (100vw - 320px) / 880);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+@media screen and (max-width: 430px) {
+  .description {
+    font-size: 20px;
+  }
+}
+
+.form-input {
+  width: 50%;
+  border-radius: 0.5rem;
+  padding: 0.4rem;
+  border: 1px solid rgba(0, 0, 0, 0);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0);
+  background: #d9d9d9;
+}
+
+.form-input::placeholder {
+  color: #444444;
+}
+
+.btn {
+  border-radius: 5rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  background: #7b168b;
+  width: 30px;
+  height: 30px;
+  background-image: url("../pic/button_submit.png");
+  background-size: 40%;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+}
+
+.btn:hover {
+  background-color: #5a1366;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
