@@ -1,4 +1,4 @@
-#!/Users/zakharovellia/code/python/env/bin/python3.11
+#!/Users/zakharovellia/code/vpn-site/python/env/bin/python3.11
 # -*- coding: utf-8 -*-
 import re
 import sys
