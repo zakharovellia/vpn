@@ -1,7 +1,7 @@
 const button = document.querySelector(".btn");
 
 async function handleBtn() {
-  let url = "localhost:8000/api/create";
+  let url = "/api/create";
 
   await fetch(url)
     .then((response) => response.json()) // Декодируем ответ в формате json

@@ -4,7 +4,7 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
-@app.post("/api/create")
+@app.get("/api/create")
 async def createconf():
 
     config = configparser.ConfigParser()
