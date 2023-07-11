@@ -1,6 +1,6 @@
-import os
-import configparser
+import subprocess
 import logging
+import configparser
 from fastapi import FastAPI
 from fastapi.responses import FileResponse
 
@@ -20,8 +20,8 @@ async def create_conf():
     port = config.get("host", "port")
     server_public_key = config.get("host", "public_key")
 
-    public_key = str(os.system("wg pubkey"))
-    private_key = str(os.system("wg genkey"))
+    user_public_key = subprocess.check_output("wg genkey", shell=True).decode("utf-8").strip()
+    user_private_key = subprocess.check_output(f"echo '{privkey}' | wg pubkey", shell=True).decode("utf-8").strip()
 
     if len(public_key) > 0 and len(private_key > 0):
         logging.INFO("Успешно сгенерировал ключи пользователя")
@@ -33,12 +33,12 @@ async def create_conf():
         with open("/etc/wireguard/vpn.conf", "a") as server_config:
             server_config.write("\n")
             server_config.write("[Peer]\n")
-            server_config.write("PublicKey = " + public_key + "\n")
+            server_config.write("PublicKey = " + user_public_key + "\n")
             server_config.write("AllowedIPs = " + ip + "/" + port + "\n")
 
         with open("user.conf", "w") as user_config:
             user_config.write("[Interface]\n")
-            user_config.write("PrivateKey = " + private_key + "\n")
+            user_config.write("PrivateKey = " + user_private_key + "\n")
             user_config.write("Address = " + ip + "/" + port + "\n")
             user_config.write("DNS = " + dns + "\n")
 
@@ -50,10 +50,10 @@ async def create_conf():
             user_config.write("AllowedIPs = " + "0.0.0.0/0" + "\n")
             user_config.write("PersistentKeepalive = " + "20" + "\n")
 
-            os.system("systemctl restart wg-quick@vpn.service")
+            if subprocess.call(["systemctl", "restart", "wg-quick@vpn.service"]) == 0:
+                 logging.INFO("Всё ок, рестарт завершён")
 
     except Exception as e:
             logging.exception(e)
-
 
     return FileResponse("user.conf")
