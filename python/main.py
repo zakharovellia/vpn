@@ -20,13 +20,8 @@ async def create_conf():
     port = config.get("host", "port")
     server_public_key = config.get("host", "public_key")
 
-    user_public_key = subprocess.check_output("wg genkey", shell=True).decode("utf-8").strip()
-    user_private_key = subprocess.check_output(f"echo '{privkey}' | wg pubkey", shell=True).decode("utf-8").strip()
-
-    if len(public_key) > 0 and len(private_key > 0):
-        logging.INFO("Успешно сгенерировал ключи пользователя")
-    else:
-        logging.ERROR("Не удалось создать ключи пользователя")
+    user_private_key = subprocess.check_output("wg genkey", shell=True).decode("utf-8").strip()
+    user_public_key = subprocess.check_output(f"echo '{user_private_key}' | wg pubkey", shell=True).decode("utf-8").strip()
 
     try:
 
