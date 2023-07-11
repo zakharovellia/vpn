@@ -18,7 +18,7 @@ async def create_conf():
     ip = config.get("host", "ip_base") + "." + config.get("host", "user_count")
     endpoint = config.get("host", "endpoint")
     port = config.get("host", "port")
-    server_public_key = config.get("host", "publickey")
+    server_public_key = config.get("host", "public_key")
 
     public_key = str(os.system("wg pubkey"))
     private_key = str(os.system("wg genkey"))
