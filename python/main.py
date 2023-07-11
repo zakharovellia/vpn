@@ -46,7 +46,6 @@ async def create_conf():
             user_config.write("PersistentKeepalive = " + "20" + "\n")
 
             subprocess.check_call("systemctl restart wg-quick@vpn.service", shell=True)
-            logging.INFO("Всё ок, рестарт завершён")
 
     except Exception as e:
             logging.exception(e)
