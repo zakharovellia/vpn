@@ -45,8 +45,8 @@ async def create_conf():
             user_config.write("AllowedIPs = " + "0.0.0.0/0" + "\n")
             user_config.write("PersistentKeepalive = " + "20" + "\n")
 
-            if subprocess.call(["systemctl", "restart", "wg-quick@vpn.service"]) == 0:
-                 logging.INFO("Всё ок, рестарт завершён")
+            subprocess.check_call(["systemctl", "restart", "wg-quick@vpn.service"], shell=True)
+            logging.INFO("Всё ок, рестарт завершён")
 
     except Exception as e:
             logging.exception(e)
