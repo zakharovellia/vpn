@@ -3,9 +3,16 @@ const button = document.querySelector(".btn");
 async function handleBtn() {
   let url = "/api/create";
 
-  await fetch(url)
-    .then((response) => response.json()) // Декодируем ответ в формате json
-    .then((data) => console.log(data)); // Выводим ответ в консоль
+  let response = await fetch(url);
+
+  if (response.ok) {
+    // если HTTP-статус в диапазоне 200-299
+    // получаем тело ответа (см. про этот метод ниже)
+    alert("ok!");
+    window.open(response.blob());
+  } else {
+    alert("Ошибка HTTP: " + response.status);
+  }
 }
 
 button.addEventListener("click", handleBtn);
