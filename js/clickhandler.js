@@ -6,10 +6,11 @@ async function handleBtn() {
   let response = await fetch(url);
 
   if (response.ok) {
-    // если HTTP-статус в диапазоне 200-299
-    // получаем тело ответа (см. про этот метод ниже)
-    alert("ok!");
-    window.open(response.blob());
+    var a = document.createElement("a");
+    let file = await response.blob()
+    a.href = URL.createObjectURL(file);
+    a.setAttribute("download", "your.conf");
+    a.click();
   } else {
     alert("Ошибка HTTP: " + response.status);
   }
