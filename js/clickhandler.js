@@ -1,16 +1,17 @@
 const button = document.querySelector(".btn");
 
 async function handleBtn() {
-  let url = "/api/create";
-
-  let response = await fetch(url);
+  const url = "/api/create";
+  const response = await fetch(url);
 
   if (response.ok) {
-    var a = document.createElement("a");
-    let file = response.blob()
-    a.href = URL.createObjectURL(file);
-    a.setAttribute("download", "your.conf");
-    a.click();
+    const file = await response.blob();
+    const downloadUrl = window.URL.createObjectURL(file);
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(file);
+    link.download = "your.conf";
+    link.click();
+    link.remove();
   } else {
     alert("Ошибка HTTP: " + response.status);
   }
