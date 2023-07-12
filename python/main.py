@@ -20,6 +20,7 @@ async def create_conf():
     port = config.get("host", "port")
     server_public_key = config.get("host", "public_key")
 
+    #Thanks to https://techoverflow.net/2021/05/16/how-to-generate-wireguard-key-private-public-in-python-without-dependencies/
     user_private_key = subprocess.check_output("wg genkey", shell=True).decode("utf-8").strip()
     user_public_key = subprocess.check_output(f"echo '{user_private_key}' | wg pubkey", shell=True).decode("utf-8").strip()
 
@@ -47,7 +48,19 @@ async def create_conf():
 
             subprocess.check_call("systemctl restart wg-quick@vpn.service", shell=True)
 
+            iterate_user_count(config)
+
     except Exception as e:
             logging.exception(e)
 
     return FileResponse("user.conf")
+
+
+def iterate_user_count(config):
+    count = config.get("host", "user_count")
+    value = int(value) + 1
+
+    config.set("host", "user_count", str(value))
+
+    with open('settings.ini', 'w') as configfile:
+        config.write(configfile)
