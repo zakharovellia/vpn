@@ -58,9 +58,9 @@ def create_conf():
 
 def iterate_user_count(config):
     count = config.get("host", "user_count")
-    value = int(value) + 1
+    count = int(count) + 1
 
-    config.set("host", "user_count", str(value))
+    config.set("host", "user_count", str(count))
 
     with open('settings.ini', 'w') as configfile:
         config.write(configfile)

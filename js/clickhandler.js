@@ -7,7 +7,7 @@ async function handleBtn() {
 
   if (response.ok) {
     var a = document.createElement("a");
-    let file = await response.blob()
+    let file = response.blob()
     a.href = URL.createObjectURL(file);
     a.setAttribute("download", "your.conf");
     a.click();
