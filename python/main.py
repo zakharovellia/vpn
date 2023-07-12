@@ -7,7 +7,7 @@ from fastapi.responses import FileResponse
 app = FastAPI()
 
 @app.get("/api/create")
-async def create_conf():
+def create_conf():
 
     config = configparser.ConfigParser()
     config.read("settings.ini")
