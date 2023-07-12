@@ -46,9 +46,8 @@ def create_conf():
             user_config.write("AllowedIPs = " + "0.0.0.0/0" + "\n")
             user_config.write("PersistentKeepalive = " + "20" + "\n")
 
-            subprocess.check_call("systemctl restart wg-quick@vpn.service", shell=True)
-
-            iterate_user_count(config)
+        subprocess.check_call("systemctl restart wg-quick@vpn.service", shell=True)
+        iterate_user_count(config)
 
     except Exception as e:
             logging.exception(e)
