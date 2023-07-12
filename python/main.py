@@ -52,7 +52,7 @@ def create_conf():
     except Exception as e:
             logging.exception(e)
 
-    return FileResponse("user.conf", filename="your.conf")
+    return FileResponse("user.conf",media_type="application/octet-stream")
 
 
 def iterate_user_count(config):
